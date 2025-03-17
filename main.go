@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"golang-microservice/config"
+	"golang-microservice/middleware"
 	"golang-microservice/routes"
 
 	"github.com/gin-gonic/gin"
@@ -20,9 +21,11 @@ func main() {
 
 	// Initialize Database
 	config.ConnectDatabase()
+	middleware.InitOAuth()
 
 	// Set up router
 	router := gin.Default()
+	routes.AuthRoutes(router)
 	routes.UserRoutes(router)
 
 	// Start server
