@@ -1,21 +1,34 @@
 package main
 
 import (
-	"user-microservice/database"
-	"user-microservice/handlers"
+	"log"
+	"os"
+
+	"golang-microservice/config"
+	"golang-microservice/routes"
 
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 )
 
 func main() {
-	database.Connect()
+	// Load environment variables
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
 
-	r := gin.Default()
+	// Initialize Database
+	config.ConnectDatabase()
 
-	r.POST("/users", handlers.CreateUser)
-	r.GET("/users/:id", handlers.GetUser)
-	r.PUT("/users/:id", handlers.UpdateUser)
-	r.DELETE("/users/:id", handlers.DeleteUser)
+	// Set up router
+	router := gin.Default()
+	routes.UserRoutes(router)
 
-	r.Run(":8080")
+	// Start server
+	port := os.Getenv("SERVER_PORT")
+	if port == "" {
+		port = "8080"
+	}
+	router.Run(":" + port)
 }

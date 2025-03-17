@@ -5,55 +5,87 @@ A simple Go-based microservice for managing users with CRUD operations and Postg
 ## Table of Contents
 
 1. [Project Structure](#project-structure)
-2. [Setup Instructions](#setup-instructions)
-3. [API Endpoints](#api-endpoints)
-4. [Environment Variables](#environment-variables)
-5. [Running Migrations](#running-migrations)
+2. [Install dependencies](#install-dependencies)
+3. [Set up the environment](#set-up-the-environment)
+4. [Running Migrations](#running-migrations)
+5. [Start the Server](#start-the-server)
 6. [Testing the API](#testing-the-api)
-7. [License](#license)
 
 ---
 ### Project Structure
 ```
-user-microservice/
-├── main.go
-├── models/
-│ └── user.go
-├── handlers/
-│ └── user_handler.go
-├── database/
-│ └── database.go
-├── migrations/
-│ └── migrations.go
-└── .env
+golang-microservice/
+│── main.go
+│── config/
+│   └── config.go
+│── models/
+│   └── user.go
+│── routes/
+│   └── user_routes.go
+│── controllers/
+│   └── user_controller.go
+│── migrations/
+│   └── migrate.go
+│── .env
+│── go.mod
+│── go.sum
+│── README.md
 ```
 
 ---
+### Install dependencies
+```
+   go mod tidy
+```
+---
+### Set up the environment
+```
+   DB_HOST=localhost
+   DB_USER=postgres
+   DB_PASSWORD=postgres
+   DB_NAME=userdb
+   DB_PORT=5432
+   SERVER_PORT=8080
+```
+---
+### Running Migrations
+```
+   go run migrations/migrate.go
+```
+---
+### Start the Server
+```
+   go run main.go
+```
+---
+### Testing the API
 
-## Setup Instructions
+#### Create a User
+```
+   POST /users
+   {
+      "name": "Jordan Lee",
+      "email": "jordanlee19930130@gmail.com"
+   }
+```
+![createUser](./result/createUsers.png)
 
-### Prerequisites
+#### Get User by ID
+```
+   GET /users/{id}
+```
+![getUserValid](./result/getUserValid.png)
+#### Update User
+```
+   PUT /users/{id}
+   {
+   "name": "John Updated",
+   "email": "john.updated@example.com"
+   }
+```
+![updateUser](./result/updateUserValid.png)
+#### Delete User
+```
+   DELETE /users/{id}
+```
 
-- Go 1.20 or higher
-- PostgreSQL
-- Git
-
-### Steps
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/allpyjs/go-user-microservice-assessment.git
-   cd go-user-microservice-assessment
-2. **Install dependences**
-    ```bash
-    go mod download
-   ```
-3. **Set up the database:**
-4. **UPdate environment variables:**
-    ```
-    DB_HOST=localhost
-    DB_USER=postgres
-    DB_PASSWORD=password
-    DB_NAME=userdb
-    DB_PORT=5432
-    ```
