@@ -79,8 +79,8 @@ golang-microservice/
 ```
    PUT /users/{id}
    {
-   "name": "John Updated",
-   "email": "john.updated@example.com"
+   "name": "Jordan Nicle Lee",
+   "email": "jordanlee19930130@gmail.com"
    }
 ```
 ![updateUser](./result/updateUserValid.png)
