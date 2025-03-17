@@ -20,8 +20,6 @@ golang-microservice/
 │   └── config.go
 │── models/
 │   └── user.go
-│── database/
-│   └── database.go
 │── routes/
 │   └── user_routes.go
 │── controllers/
