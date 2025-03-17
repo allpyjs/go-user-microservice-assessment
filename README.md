@@ -63,12 +63,31 @@ golang-microservice/
 ### Testing the API
 
 #### Create a User
-
+```
+   POST /users
+   {
+      "name": "Jordan Lee",
+      "email": "jordanlee19930130@gmail.com"
+   }
+```
+![createUser](./result/createUsers.png)
 
 #### Get User by ID
-
+```
+   GET /users/{id}
+```
+![getUserValid](./result/getUserValid.png)
 #### Update User
-
+```
+   PUT /users/{id}
+   {
+   "name": "John Updated",
+   "email": "john.updated@example.com"
+   }
+```
+![updateUser](./result/updateUserValid.png)
 #### Delete User
-
+```
+   DELETE /users/{id}
+```
 
